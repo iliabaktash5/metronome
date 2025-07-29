@@ -4,7 +4,7 @@ let startBtn = document.getElementById("start");
 let stopBtn = document.getElementById("stop");
 
 let intervalId;
-let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+let audioCtx;
 
 bpmInput.addEventListener("input", () => {
   bpmValue.textContent = bpmInput.value;
@@ -39,6 +39,9 @@ function stopMetronome() {
 }
 
 startBtn.addEventListener("click", () => {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
   if (!intervalId) {
     startMetronome();
   }
